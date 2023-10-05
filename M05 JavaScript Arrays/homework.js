@@ -49,7 +49,7 @@ function dePalabrasAFrase(palabras) {
    // con un espacio entre cada palabra.
    // Ejemplo: ['Hello', 'world!'] -> 'Hello world!'.
    // Tu código:
-   return palabras.toString(" ");
+   return palabras.join(" ");
 }
 
 function arrayContiene(array, elemento) {
@@ -101,9 +101,12 @@ function multiplicarArgumentos() {
    let result = 1;
    let nums = [...arguments];
 
-   for (let i = 0; i < nums.length; i++) {
-      result = result * nums[i];
-   };
+   if (nums.length == 0)
+      result = 0;
+   else
+      for (let i = 0; i < nums.length; i++) {
+         result = result * nums[i];
+      };
 
    return result
 }
@@ -111,11 +114,12 @@ function multiplicarArgumentos() {
 function cuentoElementos(array) {
    // Desarrolla una función que retorne la cantidad de elementos del arreglo cuyo valor sea mayor que 18.
    // Tu código:
-   let newArr = array.map(item => {
+   let count = 0;
+   array.forEach(item => {
       if (item > 18)
-         return item
+         count += 1
    });
-   return newArr
+   return count
 }
 
 function diaDeLaSemana(numeroDeDia) {
@@ -133,8 +137,9 @@ function empiezaConNueve(num) {
    // Esta función recibe por parámetro un número.
    // Debe retornar true si el entero inicia con 9 y false en otro caso.
    // Tu código:
-   let numArr = num.split("");
-   if (numArr[0] == 9)
+   let numStr = num.toString();
+
+   if (numStr.startsWith("9"))
       return true
    else
       return false
@@ -155,10 +160,14 @@ function mesesDelAño(array) {
    // "Marzo" y "Noviembre", guardarlos en un nuevo arreglo y retornarlo.
    // Si alguno de los meses no está, retornar el string: "No se encontraron los meses pedidos".
    // Tu código:
-   let newArr = array.map(month => {
-      if (month == "Enero" || month == "Marzo" || month == "Noviembre")
-         return month
-   });
+   let newArr = [];
+   if (array.includes("Enero") && array.includes("Marzo") && array.includes("Noviembre"))
+      array.map(month => {
+         if (month == "Enero" || month == "Marzo" || month == "Noviembre")
+            newArr.push(month);
+      });
+   else
+      return "No se encontraron los meses pedidos";
    return newArr
 }
 
@@ -166,22 +175,23 @@ function tablaDelSeis() {
    // Escribe una función que muestre la tabla de multiplicar del 6 (del 0 al 60).
    // La función devuelve un arreglo con los resultados de la tabla de multiplicar del 6 en orden creciente.
    // Tu código:
-   let i = 1;
-   let table = [0]
-   do {
-      let product = 6 * i;
-      table.push(product);
-      i++
-   } while (i < 10)
+   let table = [0];
+
+   for (let i = 1; i < 11; i++) {
+      table.push(6 * i)
+   };
+
+   return table;
 }
 
 function mayorACien(array) {
    // La función recibe un arreglo con enteros entre 0 y 200.
    // Recorrerlo y retornar un arreglo con todos los valores mayores a 100 (no incluye el 100).
    // Tu código:
-   let newArr = array.map(num => {
+   let newArr = [];
+   array.map(num => {
       if (num > 100)
-         return num
+         newArr.push(num);
    });
    return newArr
 }
@@ -197,6 +207,21 @@ function breakStatement(num) {
    // la ejecución y retornar el string: "Se interrumpió la ejecución".
    // [PISTA]: utiliza el statement 'break'.
    // Tu código:
+   let result = [];
+   let sum = 0;
+
+   for (let i = 0; i < 10; i++) {
+      num += 2;
+      result.push(num);
+      sum += num;
+
+      if (sum === i + 1) {
+         return "Se interrumpió la ejecución";
+         break;
+      }
+   }
+
+   return result
 }
 
 function continueStatement(num) {
@@ -206,6 +231,19 @@ function continueStatement(num) {
    // se continua con la siguiente iteración.
    // [PISTA]: utiliza el statement 'continue'.
    // Tu código:
+   let result = [];
+   let sum = 0;
+
+   for (let i = 0; i < 10; i++) {
+      if (i === 5)
+         continue;
+
+      num += 2;
+      result.push(num);
+      sum += num;
+   }
+
+   return result
 }
 
 /*⚠️ NO MODIFIQUES NADA DEBAJO DE ESTO ⚠️*/
