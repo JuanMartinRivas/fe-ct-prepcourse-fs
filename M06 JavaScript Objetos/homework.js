@@ -38,7 +38,7 @@ function agregarPropiedad(objeto, propiedad) {
    // Esta propiedad será igual al valor `null`.
    // Retornar el objeto.
    // Tu código:
-   objeto.propiedad = null;
+   objeto[propiedad] = null;
 
    return objeto
 }
@@ -48,7 +48,7 @@ function invocarMetodo(objeto, metodo) {
    // Esta propiedad contiene una función en su interior. Debes invocarla/ejecutarla.
    // [NOTA]: no necesitar retornar nada.
    // Tu código:
-   objeto.metodo()
+   objeto[metodo]();
 }
 
 function multiplicarNumeroDesconocidoPorCinco(objetoMisterioso) {
@@ -64,7 +64,7 @@ function eliminarPropiedad(objeto, propiedad) {
    // El parámetro "propiedad" es una propiedad del objeto que recibes.
    // Debes eliminarla del objeto y retornarlo finalmente.
    // Tu código:
-   delete objeto.propiedad;
+   delete objeto[propiedad];
 
    return objeto
 }
@@ -73,21 +73,30 @@ function tieneEmail(objetoUsuario) {
    // Verifica si el "objetoUsuario", en su propiedad "email", posee un valor definido.
    // En ese caso retornar true. Caso contrario, false.
    // Tu código:
-   objetoUsuario.hasOwnProperty('email')
+   if (objetoUsuario.email == null)
+      return false
+   else
+      return true
 }
 
 function tienePropiedad(objeto, propiedad) {
    // Verifica si el objeto recibido posee una propiedad con el mismo nombre que el parámetro "propiedad".
    // En ese caso retornar true. Caso contrario, false.
    // Tu código:
-   objeto.hasOwnProperty(propiedad)
+   if (objeto.hasOwnProperty(propiedad))
+      return true
+   else
+      return false
 }
 
 function verificarPassword(objetoUsuario, password) {
    // Verifica si la propiedad "password" del "objetoUsuario" coincide con el parámetro "password".
    // En ese caso retornar true. Caso contrario, false.
    // Tu código:
-   objetoUsuario.hasOwnProperty(password)
+   if (objetoUsuario.password == password)
+      return true
+   else
+      return false
 }
 
 function actualizarPassword(objetoUsuario, nuevaPassword) {
@@ -147,13 +156,11 @@ function agregarMetodoCalculoDescuento(objetoProducto) {
    // PorcentajeDeDescuento ---> 0.2
    // Precio final ---> 8
    // Tu código:
-   let precioFinal = 0;
-
    objetoProducto.calcularPrecioDescuento = () => {
-      precioFinal = objetoProducto.precio * objetoProducto.porcentajeDeDescuento
-   };
-
-   return precioFinal
+      const descuento = this.precio * this.porcentajeDeDescuento;
+      const precioFinal = this.precio - descuento;
+      return precioFinal;
+   }
 }
 
 /*⚠️ NO MODIFIQUES NADA DEBAJO DE ESTO ⚠️*/
